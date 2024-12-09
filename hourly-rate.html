@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hourly Rate Recommendation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+    }
+    select, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hourly Rate Recommendation</h1>
+  <form id="rate-form">
+    <div class="form-group">
+      <label for="profession">Select Profession:</label>
+      <select id="profession" required>
+        <option value="developer">Developer</option>
+        <option value="designer">Designer</option>
+        <option value="writer">Writer</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="location">Select Location:</label>
+      <select id="location" required>
+        <option value="india">India</option>
+        <option value="us">United States</option>
+        <option value="uk">United Kingdom</option>
+      </select>
+    </div>
+    <button type="button" id="recommend-btn">Get Recommended Hourly Rate</button>
+  </form>
+
+  <div id="result" class="result" style="display: none;">
+    <h3>Recommended Hourly Rate</h3>
+    <p>₹<span id="hourly-rate"></span></p>
+  </div>
+
+  <p><a href="index.html">Back to Pricing Calculator</a></p>
+
+  <script>
+    const ratesTable = {
+      india: { developer: 500, designer: 400, writer: 300 },
+      us: { developer: 50, designer: 40, writer: 30 },
+      uk: { developer: 40, designer: 35, writer: 25 }
+    };
+
+    document.getElementById("recommend-btn").addEventListener("click", () => {
+      const profession = document.getElementById("profession").value;
+      const location = document.getElementById("location").value;
+
+      const hourlyRate = ratesTable[location][profession];
+      document.getElementById("hourly-rate").innerText = hourlyRate.toFixed(2);
+      document.getElementById("result").style.display = "block";
+    });
+    <nav>
+    <a href="index.html">Home</a> |
+    <a href="elasticity_calculator.html">Elasticity Calculator</a>
+</nav>
+  </script>
+</body>
+</html>

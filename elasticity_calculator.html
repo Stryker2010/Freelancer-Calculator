@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elasticity Calculator</title>
+</head>
+<body>
+    <h1>Price Elasticity Simulator</h1>
+    <form id="elasticityForm">
+        <label for="currentPrice">Current Price:</label>
+        <input type="number" id="currentPrice" name="currentPrice" required><br>
+
+        <label for="newPrice">New Price:</label>
+        <input type="number" id="newPrice" name="newPrice" required><br>
+
+        <label for="currentDemand">Current Demand:</label>
+        <input type="number" id="currentDemand" name="currentDemand" required><br>
+
+        <button type="submit">Simulate</button>
+    </form>
+
+    <h2>Results</h2>
+    <div id="results"></div>
+
+    <script>
+        document.getElementById('elasticityForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const currentPrice = parseFloat(document.getElementById('currentPrice').value);
+            const newPrice = parseFloat(document.getElementById('newPrice').value);
+            const currentDemand = parseInt(document.getElementById('currentDemand').value);
+
+            const response = await fetch('/elasticity', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ current_price: currentPrice, new_price: newPrice, current_demand: currentDemand })
+            });
+            const result = await response.json();
+            
+            document.getElementById('results').innerHTML = `
+                <p>New Price: $${result.new_price}</p>
+                <p>Predicted Demand: ${result.predicted_demand.toFixed(2)} customers</p>
+                <p>Predicted Revenue: $${result.revenue.toFixed(2)}</p>
+            `;
+        });
+        <nav>
+    <a href="index.html">Home</a> |
+    <a href="hourly_rate.html">Hourly Rate Calculator</a>
+</nav>
+
+    </script>
+</body>
+</html>

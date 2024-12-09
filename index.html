@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Pricing Calculator</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 0.5rem 0;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #575757;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, button {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+            margin-top: 2rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Home page */
+        .home-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .home-container h2 {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Freelance Pricing Calculator</h1>
+    </header>
+
+    <nav>
+        <a href="#" onclick="showPage('home')">Home</a>
+        <a href="#" onclick="showPage('main')">Main Price Calculator</a>
+        <a href="#" onclick="showPage('hourly')">Hourly Rate Calculator</a>
+        <a href="#" onclick="showPage('retirement')">Retirement Planner</a>
+        <a href="#" onclick="showPage('scope')">Dynamic Scope Creep</a>
+        <a href="#" onclick="showPage('competitor')">Competitor Benchmarking</a>
+        <a href="#" onclick="showPage('discount')">Discount & Upsell</a>
+    </nav>
+
+    <div class="container">
+        <!-- Home Page -->
+        <section id="home" class="page">
+            <div class="home-container">
+                <h2>Welcome to the Freelance Pricing Calculator</h2>
+                <p>Use this tool to accurately estimate your project pricing, manage scope creep, compare with competitors, and more.</p>
+                <p>Select a calculator from the menu to get started.</p>
+            </div>
+        </section>
+
+        <!-- Main Price Calculator -->
+        <section id="main" class="page hidden">
+            <h2>Main Price Calculator</h2>
+            <form>
+                <label for="estimated-costs">Estimated Costs:</label>
+                <input type="number" id="estimated-costs" placeholder="Enter estimated costs">
+
+                <label for="desired-hourly-rate">Desired Hourly Rate:</label>
+                <input type="number" id="desired-hourly-rate" placeholder="Enter hourly rate">
+
+                <label for="hours-per-month">Hours Worked per Month:</label>
+                <input type="number" id="hours-per-month" placeholder="Enter hours per month">
+
+                <label for="profit-margin">Profit Margin (%):</label>
+                <input type="number" id="profit-margin" placeholder="Enter profit margin">
+
+                <button type="button" onclick="calculateMainPrice()">Calculate</button>
+            </form>
+            <p id="main-result"></p>
+        </section>
+
+        <!-- Hourly Rate Calculator -->
+        <section id="hourly" class="page hidden">
+            <h2>Hourly Rate Calculator</h2>
+            <form>
+                <label for="annual-salary">Desired Annual Salary:</label>
+                <input type="number" id="annual-salary" placeholder="Enter annual salary">
+
+                <label for="working-hours">Working Hours per Year:</label>
+                <input type="number" id="working-hours" placeholder="Enter working hours per year">
+
+                <button type="button" onclick="calculateHourlyRate()">Calculate</button>
+            </form>
+            <p id="hourly-result"></p>
+        </section>
+
+        <!-- Retirement Planner -->
+        <section id="retirement" class="page hidden">
+            <h2>Retirement Planner</h2>
+            <form>
+                <label for="current-savings">Current Savings:</label>
+                <input type="number" id="current-savings" placeholder="Enter savings">
+
+                <label for="monthly-saving">Monthly Contribution:</label>
+                <input type="number" id="monthly-saving" placeholder="Enter monthly saving">
+
+                <label for="years-until-retirement">Years to Retirement:</label>
+                <input type="number" id="years-until-retirement" placeholder="Enter years">
+
+                <button type="button" onclick="calculateRetirement()">Calculate</button>
+            </form>
+            <p id="retirement-result"></p>
+        </section>
+
+        <!-- Dynamic Scope Creep -->
+        <section id="scope" class="page hidden">
+            <h2>Dynamic Scope Creep Calculator</h2>
+            <form>
+                <label for="initial-cost">Initial Project Cost:</label>
+                <input type="number" id="initial-cost" placeholder="Enter initial project cost">
+
+                <label for="scope-change">Percentage of Scope Change:</label>
+                <input type="number" id="scope-change" placeholder="Enter percentage of scope change">
+
+                <button type="button" onclick="calculateScopeCreep()">Calculate</button>
+            </form>
+            <p id="scope-result"></p>
+        </section>
+
+        <!-- Competitor Benchmarking -->
+        <section id="competitor" class="page hidden">
+            <h2>Competitor Benchmarking</h2>
+            <form>
+                <label for="competitor-rate">Competitor's Rate:</label>
+                <input type="number" id="competitor-rate" placeholder="Enter competitor's rate">
+
+                <label for="your-rate">Your Rate:</label>
+                <input type="number" id="your-rate" placeholder="Enter your rate">
+
+                <button type="button" onclick="calculateCompetitorBenchmarking()">Calculate</button>
+            </form>
+            <p id="competitor-result"></p>
+        </section>
+
+        <!-- Discount & Upsell Calculator -->
+        <section id="discount" class="page hidden">
+            <h2>Discount & Upsell Calculator</h2>
+            <form>
+                <label for="original-price">Original Price:</label>
+                <input type="number" id="original-price" placeholder="Enter original price">
+
+                <label for="discount-rate">Discount Rate (%):</label>
+                <input type="number" id="discount-rate" placeholder="Enter discount rate">
+
+                <label for="upsell-rate">Upsell Rate (%):</label>
+                <input type="number" id="upsell-rate" placeholder="Enter upsell rate">
+
+                <button type="button" onclick="calculateDiscountUpsell()">Calculate</button>
+            </form>
+            <p id="discount-result"></p>
+        </section>
+    </div>
+
+    <footer>
+        © 2024 Freelance Pricing Calculator
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+
+        function calculateMainPrice() {
+            const estimatedCosts = parseFloat(document.getElementById('estimated-costs').value);
+            const hourlyRate = parseFloat(document.getElementById('desired-hourly-rate').value);
+            const hoursPerMonth = parseFloat(document.getElementById('hours-per-month').value);
+            const profitMargin = parseFloat(document.getElementById('profit-margin').value);
+
+            if (isNaN(estimatedCosts) || isNaN(hourlyRate) || isNaN(hoursPerMonth) || isNaN(profitMargin)) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            const income = hourlyRate * hoursPerMonth;
+            const profit = income * (profitMargin / 100);
+            const totalCost = estimatedCosts + profit;
+
+            document.getElementById('main-result').innerText = `Total Project Price: $${totalCost.toFixed(2)}`;
+        }
+
+        function calculateHourlyRate() {
+            const annualSalary = parseFloat(document.getElementById('annual-salary').value);
+            const workingHours = parseFloat(document.getElementById('working-hours').value);
+
+            if (isNaN(annualSalary) || isNaN(workingHours)) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            const hourlyRate = annualSalary / workingHours;
+
+            document.getElementById('hourly-result').innerText = `Hourly Rate: $${hourlyRate.toFixed(2)}`;
+        }
+
+        function calculateRetirement() {
+            const currentSavings = parseFloat(document.getElementById('current-savings').value);
+            const monthlySaving = parseFloat(document.getElementById('monthly-saving').value);
+            const yearsUntilRetirement = parseFloat(document.getElementById('years-until-retirement').value);
+
+            if (isNaN(currentSavings) || isNaN(monthlySaving) || isNaN(yearsUntilRetirement)) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            const monthsUntilRetirement = yearsUntilRetirement * 12;
+            const totalSavings = currentSavings + (monthlySaving * monthsUntilRetirement);
+
+            document.getElementById('retirement-result').innerText = `Total Savings at Retirement: $${totalSavings.toFixed(2)}`;
+        }
+
+        function calculateScopeCreep() {
+            const initialCost = parseFloat(document.getElementById('initial-cost').value);
+            const scopeChange = parseFloat(document.getElementById('scope-change').value);
+
+            if (isNaN(initialCost) || isNaN(scopeChange)) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            const additionalCost = initialCost * (scopeChange / 100);
+            const totalCost = initialCost + additionalCost;
+
+            document.getElementById('scope-result').innerText = `New Total Project Cost: $${totalCost.toFixed(2)}`;
+        }
+
+        function calculateCompetitorBenchmarking() {
+            const competitorRate = parseFloat(document.getElementById('competitor-rate').value);
+            const yourRate = parseFloat(document.getElementById('your-rate').value);
+
+            if (isNaN(competitorRate) || isNaN(yourRate)) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            const rateDifference = yourRate - competitorRate;
+
+            document.getElementById('competitor-result').innerText = `Rate Difference: $${rateDifference.toFixed(2)}`;
+        }
+
+        function calculateDiscountUpsell() {
+            const originalPrice = parseFloat(document.getElementById('original-price').value);
+            const discountRate = parseFloat(document.getElementById('discount-rate').value);
+            const upsellRate = parseFloat(document.getElementById('upsell-rate').value);
+
+            if (isNaN(originalPrice) || isNaN(discountRate) || isNaN(upsellRate)) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            const discountedPrice = originalPrice * (1 - discountRate / 100);
+            const upsellPrice = discountedPrice * (1 + upsellRate / 100);
+
+            document.getElementById('discount-result').innerText = `Final Price After Discount and Upsell: $${upsellPrice.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
