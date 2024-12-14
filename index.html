@@ -366,6 +366,84 @@
             document.getElementById('discount-result').innerText = Final Price After Discount and Upsell: $${upsellPrice.toFixed(2)};
         }
     </script>
+    <script>
+    // Function to handle navigation and display the selected page
+    function showPage(pageId) {
+        // Hide all pages
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(page => {
+            page.classList.add('hidden');
+        });
+
+        // Show the selected page
+        const selectedPage = document.getElementById(pageId);
+        if (selectedPage) {
+            selectedPage.classList.remove('hidden');
+        }
+    }
+
+    // Calculator Functions
+    function calculateMainPrice() {
+        const costs = parseFloat(document.getElementById('estimated-costs').value) || 0;
+        const hourlyRate = parseFloat(document.getElementById('desired-hourly-rate').value) || 0;
+        const hours = parseFloat(document.getElementById('hours-per-month').value) || 0;
+        const profitMargin = parseFloat(document.getElementById('profit-margin').value) || 0;
+
+        const basePrice = costs + (hourlyRate * hours);
+        const finalPrice = basePrice * (1 + profitMargin / 100);
+
+        document.getElementById('main-result').innerText = `Final Project Price: $${finalPrice.toFixed(2)}`;
+    }
+
+    function calculateHourlyRate() {
+        const annualSalary = parseFloat(document.getElementById('annual-salary').value) || 0;
+        const workingHours = parseFloat(document.getElementById('working-hours').value) || 1;
+
+        const hourlyRate = annualSalary / workingHours;
+        document.getElementById('hourly-result').innerText = `Hourly Rate: $${hourlyRate.toFixed(2)}`;
+    }
+
+    function calculateRetirement() {
+        const currentSavings = parseFloat(document.getElementById('current-savings').value) || 0;
+        const monthlySaving = parseFloat(document.getElementById('monthly-saving').value) || 0;
+        const years = parseFloat(document.getElementById('years-until-retirement').value) || 0;
+
+        const totalSavings = currentSavings + (monthlySaving * years * 12);
+        document.getElementById('retirement-result').innerText = `Total Savings at Retirement: $${totalSavings.toFixed(2)}`;
+    }
+
+    function calculateScopeCreep() {
+        const initialCost = parseFloat(document.getElementById('initial-cost').value) || 0;
+        const scopeChange = parseFloat(document.getElementById('scope-change').value) || 0;
+
+        const newCost = initialCost * (1 + scopeChange / 100);
+        document.getElementById('scope-result').innerText = `New Project Cost: $${newCost.toFixed(2)}`;
+    }
+
+    function calculateCompetitorBenchmarking() {
+        const competitorRate = parseFloat(document.getElementById('competitor-rate').value) || 0;
+        const yourRate = parseFloat(document.getElementById('your-rate').value) || 0;
+
+        const difference = yourRate - competitorRate;
+        document.getElementById('competitor-result').innerText = 
+            difference > 0 
+            ? `Your rate is $${difference.toFixed(2)} higher than your competitor.` 
+            : `Your rate is $${Math.abs(difference).toFixed(2)} lower than your competitor.`;
+    }
+
+    function calculateDiscountUpsell() {
+        const originalPrice = parseFloat(document.getElementById('original-price').value) || 0;
+        const discountRate = parseFloat(document.getElementById('discount-rate').value) || 0;
+        const upsellRate = parseFloat(document.getElementById('upsell-rate').value) || 0;
+
+        const discountedPrice = originalPrice * (1 - discountRate / 100);
+        const upsellPrice = originalPrice * (1 + upsellRate / 100);
+
+        document.getElementById('discount-result').innerText = 
+            `Discounted Price: $${discountedPrice.toFixed(2)} | Upsell Price: $${upsellPrice.toFixed(2)}`;
+    }
+</script>
+
 </body>
 </html>
 
